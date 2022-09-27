@@ -15,7 +15,7 @@ class Producto:
 
         
         frame = LabelFrame(self.wind, text = 'Registrar un nuevo producto')
-        frame.grid(row = 0, column = 0, columnspan = 3, pady = 20) #puede que en columns spaiin sea 5
+        frame.grid(row = 0, column = 0, columnspan = 3, pady = 20) #
 
         #Entradas
         Label(frame, text = 'Nombre').grid(row=1, column=0)
@@ -27,7 +27,7 @@ class Producto:
         self.descripcion = Entry(frame)
         self.descripcion.grid(row = 2, column = 1)
 
-        Label(frame, text = 'Id Proveedor').grid(row=3, column=0) ######por un choice
+        Label(frame, text = 'Id Proveedor').grid(row=3, column=0) 
         self.id_proveedor = Entry(frame)
         self.id_proveedor.grid(row = 3, column = 1)
 
@@ -111,20 +111,18 @@ class Producto:
         #Limpiar los mensajes
         self.message['text'] = ''
 
-        #Saber que dato esta seleccionado, sino selecciona ninguna, muestra el mensaje.
         try:
             self.tree.item(self.tree.selection())['values'][0]
         except IndexError as e:
             self.message['text'] = 'Por favor selecciona un registro'
             return
 
-        #Eliminar en si un registro
-        #primero obtener los valores
+       
         nombre = self.tree.item(self.tree.selection())['values'][0]
         query = 'DELETE FROM Producto WHERE nombre_producto = ?'
         self.run_query(query,(nombre, ))
 
-        #Mensaje de que se ha realizado
+        #Mensaje check
         self.message['text'] = 'El registro {} se ha eliminado exitosamente'.format(nombre)
         self.get_producto()
 
@@ -140,8 +138,7 @@ class Producto:
             self.message['text'] = 'Por favor selecciona un registro'
             return
 
-        #Editar en si un registro
-        #primero obtener los valores
+        #Editar 
         nombre = self.tree.item(self.tree.selection())['values'][0]
         descripcion = self.tree.item(self.tree.selection())['values'][1]
         id_proveedor = self.tree.item(self.tree.selection())['values'][2] #error tacitoc x2 mi lok
