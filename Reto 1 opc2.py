@@ -70,7 +70,7 @@ class Producto:
         window.mainloop()
 
     def get_producto(self):
-        records = self.tree.get_children() #Obtener todos los datos que esten en la tabla, para limpiarlos o agregarlos
+        records = self.tree.get_children() 
         for element in records: #Ciclo para limpiar la tabla
             self.tree.delete(element)
 
@@ -81,8 +81,7 @@ class Producto:
         #LLenar los datos en tabla
         for row in db_rows:
             #print(row) #imprime por consola los registros de la base de datos
-            self.tree.insert('', 'end', text= row[0], values=( row[1], row[2], row[3])) #en el row[] se pone el numero de la columna que se quere mostrar de la base de datos
-
+            self.tree.insert('', 'end', text= row[0], values=( row[1], row[2], row[3])) 
     def validation(self): #Una validacion de que los espacios no esten vacios
         return len(self.nombre.get()) != 0 and len(self.id_proveedor.get()) !=0
         
@@ -174,7 +173,7 @@ class Producto:
         self.edit_wind.mainloop()
 
     def edit_registros(self, nuevo_nombre, nombre, nueva_descripcion, descripcion, nuevo_id_proveedor, id_proveedor):
-        #PARA HACER EN SI LA EDICION DEL PRODUCTO, CUANDO YA SE LE DE AL BOTON, algun error por aca maybe
+       
         query = 'UPDATE Producto SET nombre_producto = ?, descripcion = ?, FK_id_proveedor = ? WHERE nombre_producto = ? AND descripcion = ? AND FK_id_proveedor = ?' #Comando para actulizar un registro en sql
         parameters = (nuevo_nombre, nueva_descripcion, nuevo_id_proveedor,   nombre, descripcion, id_proveedor) #parametros necesarios
         self.run_query(query, parameters)
@@ -193,8 +192,8 @@ class Proveedor:
         self.wind.title('Aplicacion de Proveedor')
 
         #Crear un Frame que sea contenedor
-        frame = LabelFrame(self.wind, text = 'Registrar un nuevo proveedor') #, text = 'Registrar un nuevo proveedor' no deja poner nombre :,v
-        frame.grid(row = 0, column = 0, columnspan = 3, pady = 20) #puede que en columns spaiin sea 5
+        frame = LabelFrame(self.wind, text = 'Registrar un nuevo proveedor') 
+        frame.grid(row = 0, column = 0, columnspan = 3, pady = 20) 
 
         #Entradas (Inputs)
         Label(frame, text = 'Nombre').grid(row=1, column=0)
@@ -210,7 +209,7 @@ class Proveedor:
         ttk.Button(frame, text = 'Guardar Proveedor', command = self.add_proveedor).grid(row = 3, columnspan = 2, sticky= W +E)
 
         #Tabla
-        self.tree = ttk.Treeview(height = 10, columns = ('#0', '#1')) #Funciona ¿Como? NO c
+        self.tree = ttk.Treeview(height = 10, columns = ('#0', '#1')) 
         self.tree.grid(row = 4, column = 0, columnspan = 2)
         self.tree.heading('#0', text = 'Id proveedor', anchor = CENTER)
         self.tree.heading('#1', text = 'Nombre', anchor = CENTER)
@@ -243,7 +242,7 @@ class Proveedor:
                 
 
     def get_proveedor(self):
-        registro = self.tree.get_children() #Obtener todos los datos que esten en la tabla, para limpiarlos o agregarlos
+        registro = self.tree.get_children() 
         for element in registro: #Ciclo para limpiar la tabla
             self.tree.delete(element)
 
@@ -253,8 +252,7 @@ class Proveedor:
 
         #LLenar los datos en tabla
         for row in db_rows:
-            self.tree.insert('', 'end', text= row[0], values=( row[1], row[2])) #en el row[] se pone el numero de la columna que se quere mostrar de la base de datos
-            ##MAYOR ERROR ACA VIDA HPTA x2
+            self.tree.insert('', 'end', text= row[0], values=( row[1], row[2])) 
 
     def validation(self): #Una validacion de que los espacios no esten vacios
         return len(self.nombre.get()) != 0 and len(self.direccion.get()) !=0
@@ -292,7 +290,7 @@ class Proveedor:
 
         #Eliminar en si un registro
         #primero obtener los valores
-        nombre = self.tree.item(self.tree.selection())['values'][0] #Este cambia dado que values es el nombre, y el la lista valñues el nombre esta en la posicion 0
+        nombre = self.tree.item(self.tree.selection())['values'][0] 
         query = 'DELETE FROM Proveedor WHERE nombre = ?'
         self.run_query(query,(nombre, ))
 
@@ -341,8 +339,8 @@ class Proveedor:
         self.edit_wind.mainloop()
 
     def edit_registro(self, nuevo_nombre, nombre, nueva_direccion, direccion):
-        #PARA HACER EN SI LA EDICION DEL PRODUCTO, CUANDO YA SE LE DE AL BOTON, algun error por aca maybe
-        query = 'UPDATE Proveedor SET nombre = ?, direccion = ? WHERE nombre = ? AND direccion = ?' #Comando para actulizar un registro en sql
+     
+        query = 'UPDATE Proveedor SET nombre = ?, direccion = ? WHERE nombre = ? AND direccion = ?' #ctulizar un registro en sql
         parameters = (nuevo_nombre, nueva_direccion, nombre, direccion) #parametros necesarios
         self.run_query(query, parameters)
         self.edit_wind.destroy()
@@ -384,7 +382,7 @@ if __name__ == '__main__': #dobles guiones bajos
 
     eleccion = ['Exit', 'Tabla Proveedor','Tabla Producto']
 
-    # setting variable for Integers
+    
     variable = StringVar()
     variable.set(eleccion[2])
 
